@@ -27,7 +27,7 @@ async function initialize(): Promise<void> {
       ? { wasmLoaderPath: simdLoaderUrl, wasmBinaryPath: simdBinaryUrl }
       : { wasmLoaderPath: noSimdLoaderUrl, wasmBinaryPath: noSimdBinaryUrl }
     landmarker = await HandLandmarker.createFromOptions(vision, {
-      baseOptions: { delegate: 'CPU', modelAssetPath: '/lemonade/hand_landmarker.task' },
+      baseOptions: { delegate: 'CPU', modelAssetPath: `${import.meta.env.BASE_URL}lemonade/hand_landmarker.task` },
       runningMode: 'VIDEO',
       numHands: 1,
       minHandDetectionConfidence: .56,

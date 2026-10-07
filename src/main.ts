@@ -137,7 +137,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       <div id="player" class="player" aria-label="떨어지는 글자를 피해 자동으로 도망가는 여자 캐릭터">
         <span class="look-line" aria-hidden="true"></span>
         <span class="sprite-window" aria-hidden="true">
-          <img class="sprite-sheet" src="/girl-run-sprite-v2.png" alt="" />
+          <img class="sprite-sheet" src="${import.meta.env.BASE_URL}girl-run-sprite-v2.png" alt="" />
         </span>
         <span class="player-shadow" aria-hidden="true"></span>
       </div>

@@ -189,7 +189,7 @@ export function setupSamplerGame(container: HTMLElement, isActive: () => boolean
   async function loadPublicSample(key: PadKey): Promise<void> {
     for (const extension of ['wav', 'mp3']) {
       try {
-        const response = await fetch(`/samples/${key}.${extension}`)
+        const response = await fetch(`${import.meta.env.BASE_URL}samples/${key}.${extension}`)
         if (!response.ok) continue
         const buffer = await audioContext.decodeAudioData(await response.arrayBuffer())
         const pad = pads.get(key)!

@@ -340,7 +340,7 @@ export function setupWaterTouchGame(container: HTMLElement, isActive: () => bool
     if (handLandmarker) return handLandmarker
     if (handLandmarkerPromise) return handLandmarkerPromise
     handLandmarkerPromise = (async () => {
-      const vision = await FilesetResolver.forVisionTasks('/lemonade/wasm')
+      const vision = await FilesetResolver.forVisionTasks(`${import.meta.env.BASE_URL}lemonade/wasm`)
       const options = {
         runningMode: 'VIDEO' as const,
         numHands: 2,
@@ -351,12 +351,12 @@ export function setupWaterTouchGame(container: HTMLElement, isActive: () => bool
       try {
         return await HandLandmarker.createFromOptions(vision, {
           ...options,
-          baseOptions: { modelAssetPath: '/lemonade/hand_landmarker.task', delegate: 'GPU' },
+          baseOptions: { modelAssetPath: `${import.meta.env.BASE_URL}lemonade/hand_landmarker.task`, delegate: 'GPU' },
         })
       } catch {
         return HandLandmarker.createFromOptions(vision, {
           ...options,
-          baseOptions: { modelAssetPath: '/lemonade/hand_landmarker.task', delegate: 'CPU' },
+          baseOptions: { modelAssetPath: `${import.meta.env.BASE_URL}lemonade/hand_landmarker.task`, delegate: 'CPU' },
         })
       }
     })()

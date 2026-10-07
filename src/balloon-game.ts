@@ -281,7 +281,7 @@ export function setupBalloonGame(container: HTMLElement, isActive: () => boolean
     balloonImageReady = true
     balloons.forEach((balloon) => { balloon.sprite = spriteForHue(balloon.hue, balloon.sprite) })
   })
-  balloonImage.src = '/ballon.png'
+  balloonImage.src = `${import.meta.env.BASE_URL}ballon.png`
 
   function setCaptureStatus(message: string, persist = false): void {
     captureStatus.textContent = message
@@ -504,7 +504,7 @@ export function setupBalloonGame(container: HTMLElement, isActive: () => boolean
     if (handLandmarker) return handLandmarker
     if (handLandmarkerPromise) return handLandmarkerPromise
     handLandmarkerPromise = (async () => {
-      const vision = await FilesetResolver.forVisionTasks('/lemonade/wasm')
+      const vision = await FilesetResolver.forVisionTasks(`${import.meta.env.BASE_URL}lemonade/wasm`)
       const options = {
         runningMode: 'VIDEO' as const,
         numHands: 2,
@@ -515,12 +515,12 @@ export function setupBalloonGame(container: HTMLElement, isActive: () => boolean
       try {
         return await HandLandmarker.createFromOptions(vision, {
           ...options,
-          baseOptions: { modelAssetPath: '/lemonade/hand_landmarker.task', delegate: 'GPU' },
+          baseOptions: { modelAssetPath: `${import.meta.env.BASE_URL}lemonade/hand_landmarker.task`, delegate: 'GPU' },
         })
       } catch {
         return HandLandmarker.createFromOptions(vision, {
           ...options,
-          baseOptions: { modelAssetPath: '/lemonade/hand_landmarker.task', delegate: 'CPU' },
+          baseOptions: { modelAssetPath: `${import.meta.env.BASE_URL}lemonade/hand_landmarker.task`, delegate: 'CPU' },
         })
       }
     })()
@@ -537,17 +537,17 @@ export function setupBalloonGame(container: HTMLElement, isActive: () => boolean
     if (faceLandmarker) return faceLandmarker
     if (faceLandmarkerPromise) return faceLandmarkerPromise
     faceLandmarkerPromise = (async () => {
-      const vision = await FilesetResolver.forVisionTasks('/lemonade/wasm')
+      const vision = await FilesetResolver.forVisionTasks(`${import.meta.env.BASE_URL}lemonade/wasm`)
       const options = { runningMode: 'VIDEO' as const, numFaces: 1, minFaceDetectionConfidence: .52, minTrackingConfidence: .5 }
       try {
         return await FaceLandmarker.createFromOptions(vision, {
           ...options,
-          baseOptions: { modelAssetPath: '/lemonade/face_landmarker.task', delegate: 'GPU' },
+          baseOptions: { modelAssetPath: `${import.meta.env.BASE_URL}lemonade/face_landmarker.task`, delegate: 'GPU' },
         })
       } catch {
         return FaceLandmarker.createFromOptions(vision, {
           ...options,
-          baseOptions: { modelAssetPath: '/lemonade/face_landmarker.task', delegate: 'CPU' },
+          baseOptions: { modelAssetPath: `${import.meta.env.BASE_URL}lemonade/face_landmarker.task`, delegate: 'CPU' },
         })
       }
     })()

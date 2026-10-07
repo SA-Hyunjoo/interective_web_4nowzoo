@@ -578,15 +578,15 @@ export function setupShampooGame(container: HTMLElement, isActive: () => boolean
   }
 
   async function createModels(): Promise<void> {
-    const vision = await FilesetResolver.forVisionTasks('/lemonade/wasm')
+    const vision = await FilesetResolver.forVisionTasks(`${import.meta.env.BASE_URL}lemonade/wasm`)
     const common = { runningMode: 'VIDEO' as const }
     try {
-      faceLandmarker = await FaceLandmarker.createFromOptions(vision, { ...common, baseOptions: { delegate: 'GPU', modelAssetPath: '/lemonade/face_landmarker.task' }, numFaces: 1, minFaceDetectionConfidence: .55, minTrackingConfidence: .55 })
-      imageSegmenter = await ImageSegmenter.createFromOptions(vision, { ...common, baseOptions: { delegate: 'GPU', modelAssetPath: '/shampoo-selfie-segmentation.tflite' }, outputConfidenceMasks: true, outputCategoryMask: false })
+      faceLandmarker = await FaceLandmarker.createFromOptions(vision, { ...common, baseOptions: { delegate: 'GPU', modelAssetPath: `${import.meta.env.BASE_URL}lemonade/face_landmarker.task` }, numFaces: 1, minFaceDetectionConfidence: .55, minTrackingConfidence: .55 })
+      imageSegmenter = await ImageSegmenter.createFromOptions(vision, { ...common, baseOptions: { delegate: 'GPU', modelAssetPath: `${import.meta.env.BASE_URL}shampoo-selfie-segmentation.tflite` }, outputConfidenceMasks: true, outputCategoryMask: false })
     } catch {
       faceLandmarker?.close(); imageSegmenter?.close()
-      faceLandmarker = await FaceLandmarker.createFromOptions(vision, { ...common, baseOptions: { delegate: 'CPU', modelAssetPath: '/lemonade/face_landmarker.task' }, numFaces: 1, minFaceDetectionConfidence: .55, minTrackingConfidence: .55 })
-      imageSegmenter = await ImageSegmenter.createFromOptions(vision, { ...common, baseOptions: { delegate: 'CPU', modelAssetPath: '/shampoo-selfie-segmentation.tflite' }, outputConfidenceMasks: true, outputCategoryMask: false })
+      faceLandmarker = await FaceLandmarker.createFromOptions(vision, { ...common, baseOptions: { delegate: 'CPU', modelAssetPath: `${import.meta.env.BASE_URL}lemonade/face_landmarker.task` }, numFaces: 1, minFaceDetectionConfidence: .55, minTrackingConfidence: .55 })
+      imageSegmenter = await ImageSegmenter.createFromOptions(vision, { ...common, baseOptions: { delegate: 'CPU', modelAssetPath: `${import.meta.env.BASE_URL}shampoo-selfie-segmentation.tflite` }, outputConfidenceMasks: true, outputCategoryMask: false })
     }
     createHandWorker()
   }

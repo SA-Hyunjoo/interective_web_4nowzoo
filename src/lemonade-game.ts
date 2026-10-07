@@ -48,7 +48,7 @@ export function setupLemonadeGame(container: HTMLElement, isActive: () => boolea
     spriteContext.putImageData(pixels, 0, 0)
     lemonSprite = sprite
   })
-  lemonImage.src = '/lemonade/lemon-1.png'
+  lemonImage.src = `${import.meta.env.BASE_URL}lemonade/lemon-1.png`
 
   let stream: MediaStream | null = null
   let handLandmarker: HandLandmarker | null = null
@@ -177,24 +177,24 @@ export function setupLemonadeGame(container: HTMLElement, isActive: () => boolea
       }
       video.srcObject = stream
       await video.play()
-      const vision = await FilesetResolver.forVisionTasks('/lemonade/wasm')
+      const vision = await FilesetResolver.forVisionTasks(`${import.meta.env.BASE_URL}lemonade/wasm`)
       const baseOptions = { delegate: 'GPU' as const }
       try {
         handLandmarker = await HandLandmarker.createFromOptions(vision, {
-          baseOptions: { ...baseOptions, modelAssetPath: '/lemonade/hand_landmarker.task' },
+          baseOptions: { ...baseOptions, modelAssetPath: `${import.meta.env.BASE_URL}lemonade/hand_landmarker.task` },
           runningMode: 'VIDEO', numHands: 2, minHandDetectionConfidence: 0.58, minTrackingConfidence: 0.55,
         })
         faceLandmarker = await FaceLandmarker.createFromOptions(vision, {
-          baseOptions: { ...baseOptions, modelAssetPath: '/lemonade/face_landmarker.task' },
+          baseOptions: { ...baseOptions, modelAssetPath: `${import.meta.env.BASE_URL}lemonade/face_landmarker.task` },
           runningMode: 'VIDEO', numFaces: 1, minFaceDetectionConfidence: 0.55, minTrackingConfidence: 0.55,
         })
       } catch {
         handLandmarker = await HandLandmarker.createFromOptions(vision, {
-          baseOptions: { modelAssetPath: '/lemonade/hand_landmarker.task', delegate: 'CPU' },
+          baseOptions: { modelAssetPath: `${import.meta.env.BASE_URL}lemonade/hand_landmarker.task`, delegate: 'CPU' },
           runningMode: 'VIDEO', numHands: 2, minHandDetectionConfidence: 0.58, minTrackingConfidence: 0.55,
         })
         faceLandmarker = await FaceLandmarker.createFromOptions(vision, {
-          baseOptions: { modelAssetPath: '/lemonade/face_landmarker.task', delegate: 'CPU' },
+          baseOptions: { modelAssetPath: `${import.meta.env.BASE_URL}lemonade/face_landmarker.task`, delegate: 'CPU' },
           runningMode: 'VIDEO', numFaces: 1, minFaceDetectionConfidence: 0.55, minTrackingConfidence: 0.55,
         })
       }

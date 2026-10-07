@@ -106,7 +106,7 @@ export function setupBrainGame(container: HTMLElement, isActive: () => boolean):
     bufferContext.putImageData(pixels, 0, 0)
     brainSprite = buffer
   })
-  brainSource.src = '/assets/brain-source.png'
+  brainSource.src = `${import.meta.env.BASE_URL}assets/brain-source.png`
 
   function makeFighter(side: Side): Fighter {
     return {

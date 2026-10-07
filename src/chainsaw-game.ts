@@ -157,12 +157,12 @@ export function setupChainsaw(root: HTMLElement, isActive: () => boolean): Chain
       const next = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user', width: { ideal: 960 }, height: { ideal: 540 } }, audio: false })
       if (token !== generation || !isActive() || document.hidden) { next.getTracks().forEach(t => t.stop()); return }
       stream = next; video.srcObject = next; await video.play()
-      const vision = await FilesetResolver.forVisionTasks('/lemonade/wasm')
+      const vision = await FilesetResolver.forVisionTasks(`${import.meta.env.BASE_URL}lemonade/wasm`)
       if (!face) face = await FaceLandmarker.createFromOptions(vision, {
-        baseOptions: { modelAssetPath: '/lemonade/face_landmarker.task', delegate: 'CPU' }, runningMode: 'VIDEO', numFaces: 1,
+        baseOptions: { modelAssetPath: `${import.meta.env.BASE_URL}lemonade/face_landmarker.task`, delegate: 'CPU' }, runningMode: 'VIDEO', numFaces: 1,
       })
       if (!hand) hand = await HandLandmarker.createFromOptions(vision, {
-        baseOptions: { modelAssetPath: '/lemonade/hand_landmarker.task', delegate: 'CPU' }, runningMode: 'VIDEO', numHands: 2,
+        baseOptions: { modelAssetPath: `${import.meta.env.BASE_URL}lemonade/hand_landmarker.task`, delegate: 'CPU' }, runningMode: 'VIDEO', numHands: 2,
       })
       if (token !== generation || !isActive() || document.hidden) { stop(); return }
       start.hidden = true

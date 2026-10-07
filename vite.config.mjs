@@ -4,8 +4,11 @@ import { networkInterfaces } from 'node:os'
 import { defineConfig } from 'vite'
 
 export default defineConfig(({ command, isPreview }) => {
-  // Production builds and preview keep their existing settings and need no certificates.
-  if (command !== 'serve' || isPreview) return {}
+  // Project Pages uses a repository prefix; local HTTPS stays at the root.
+  const base = command === 'build' || isPreview
+    ? (process.env.PAGES_BASE_PATH || '/interective_web_4nowzoo/')
+    : '/'
+  if (command !== 'serve' || isPreview) return { base }
 
   let cert, key
   try {
@@ -25,6 +28,7 @@ export default defineConfig(({ command, isPreview }) => {
   }
 
   return {
+    base,
     server: {
       host: '0.0.0.0',
       https: { cert, key },
