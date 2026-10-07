@@ -1,0 +1,28 @@
+{
+  "name": "real",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "predev": "node scripts/dev-certificates.mjs --ensure",
+    "dev": "vite",
+    "cert:generate": "node scripts/dev-certificates.mjs",
+    "cert:trust": "node scripts/dev-certificates.mjs --install",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "node --test tests/*.test.mjs",
+    "test:browser": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "typescript": "~6.0.2",
+    "vite": "^8.2.2"
+  },
+  "dependencies": {
+    "@mediapipe/tasks-vision": "^1.0.1",
+    "@types/three": "^0.185.4",
+    "cannon-es": "^0.20.0",
+    "html2canvas": "^1.4.1",
+    "three": "^0.185.1"
+  }
+}

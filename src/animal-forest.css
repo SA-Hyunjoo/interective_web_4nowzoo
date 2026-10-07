@@ -1,0 +1,24 @@
+.af-world { position: relative; height: 100%; overflow: hidden; color: #395948; background: radial-gradient(ellipse at 49% 48%, #fffbe9 0%, #eef1dc 44%, #e2ecdd 78%, #d6e5db 100%); }
+.af-world::after { content: ''; pointer-events: none; position: absolute; width: 40%; height: 5%; left: 30%; bottom: 16%; background: #648974; opacity: .14; filter: blur(25px); border-radius: 50%; }
+.af-heading { position: absolute; top: 30px; left: 40px; z-index: 2; pointer-events: none; }
+.af-eyebrow { font-size: 9px; letter-spacing: .22em; color: #7e9780; font-weight: 700; }
+.af-heading h1 { margin: 10px 0 9px; font-size: clamp(27px, 3.5vw, 46px); letter-spacing: -.065em; line-height: 1.2; font-weight: 850; }
+.af-heading h1 span { display: block; margin-top: 9px; font-size: 13px; letter-spacing: .03em; color: #6f8970; font-weight: 500; }
+.af-heading p { font-size: 11px; color: #8c9a82; margin-top: 15px; }
+.af-stage { position: absolute; inset: 24px 0 80px; z-index: 1; }
+.af-stage canvas { width: 100%; height: 100%; display: block; cursor: grab; touch-action: none; }
+.af-stage canvas:active { cursor: grabbing; }
+.af-note { position: absolute; left: 40px; bottom: 107px; display: flex; align-items: center; gap: 12px; z-index: 2; pointer-events: none; }
+.af-leaf { font-size: 44px; color: #789369; }
+.af-note b { font-size: 11px; font-weight: 650; }
+.af-note p { font-size: 10px; color: #8a9a83; margin: 7px 0 0; }
+.af-controls { display: flex; align-items: center; gap: 3px; position: absolute; right: 35px; bottom: 112px; z-index: 3; border: 1px solid #ffffffb0; background: #fffdf4be; box-shadow: 0 5px 22px #4261450b; border-radius: 30px; padding: 7px; backdrop-filter: blur(12px); }
+.af-controls button { background: transparent; border: 0; color: #597356; height: 34px; min-width: 34px; border-radius: 24px; font-size: 20px; }
+.af-controls button:hover { background: #dce8d5; }
+.af-controls button:focus-visible { outline: 2px solid #6c9068; }
+.af-controls button span { font-size: 11px; margin: 0 10px 0 5px; vertical-align: 2px; }
+.af-divider { height: 17px; width: 1px; background: #d9dfcc; margin: 0 5px; }
+.af-hint { position: absolute; display: flex; gap: 14px; align-items: center; justify-content: center; left: 0; right: 0; bottom: 82px; color: #81937b; font-size: 10px; z-index: 2; pointer-events: none; }
+.af-hint i { width: 3px; height: 3px; border-radius: 50%; background: #a7b49a; }
+.af-edition { position: absolute; right: 39px; top: 34px; font-size: 9px; color: #93a18a; letter-spacing: .16em; }
+@media(max-width: 760px) { .af-heading { left: 22px; top: 22px; } .af-heading p, .af-note, .af-edition { display: none; } .af-stage { inset: 100px 0 128px; } .af-controls { right: 18px; bottom: 111px; } .af-hint { bottom: 87px; font-size: 9px; } }
